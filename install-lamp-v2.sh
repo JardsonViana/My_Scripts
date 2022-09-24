@@ -94,8 +94,8 @@ echo '<?php phpinfo(); ?>' > /var/www/html/phpinfo.php
 #~------------------- Configuração de senha root do mariadb:
 echo "[INFO] - Alterando senha Mysql root..."
 
-echo "[INFO] - ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_NEW_PW';" | mysql -u"$MYSQL_USER" -p"$MYSQL_PW" "$MYSQL_BANCO"
-echo "[INFO] - FLUSH PRIVILEGES;" | mysql -u"$MYSQL_USER" -p"$MYSQL_NEW_PW" "$MYSQL_BANCO"
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_NEW_PW';" | mysql -u"$MYSQL_USER" -p"$MYSQL_PW" "$MYSQL_BANCO"
+echo "FLUSH PRIVILEGES;" | mysql -u"$MYSQL_USER" -p"$MYSQL_NEW_PW" "$MYSQL_BANCO"
 
 echo "[INFO] - Limpando Historico do mysql..."
 echo > /root/.mysql_history
