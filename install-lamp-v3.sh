@@ -72,6 +72,9 @@ DIR_PHPINFO="/var/www/html/phpinfo.php"
 
 #------------------- Instalação servidor Apache:
 
+figlet -c "JV CONSULT ISP"
+sleep 2
+
 echo "[INFO] - Iniciando Instalação do Apache2..."
 apt update &> "$DIR_NULL"
 
@@ -162,8 +165,18 @@ sleep 2
 rsync -vza "$DIR_ARQUIVO"/lamp* jardson@200.110.202.3:/home/jardson/backup_servidores &> "$DIR_ARQUIVO"/rsync.txt
 sleep 2
 
+echo "[INFO] - LIMPANDO SISTEMA..."
+sleep 1
+apt autoremove -y &> "$DIR_NULL"
+apt clean &> "$DIR_NULL"
+rm -rf "$DIR_ARQUIVO" &> "$DIR_NULL"
+sleep 2
+
 echo "[INFO] - Instalação concluida com sucesso..!"
 sleep 1
+
+figlet -c OBRIGADO!
+sleep 2
 
 #--------------------------------------------------
 #--------------------------------------------------
