@@ -47,11 +47,11 @@ apt upgrade -y &> /etc/null
 sleep 2
 
 echo "[ INFO ] - INSTALANDO PACOTES NECESSÁRIOS..."
-apt install \
+apt install -y \
 vim bash-completion fzf grc \
 iotop htop ipcalc whois iftop \
 traceroute mtr-tiny net-tools \
-neofetch wget figlet -y &> /etc/null
+neofetch wget figlet tree psmisc &> /etc/null
 sleep 2
 
 figlet -c "JV CONSULT ISP"
