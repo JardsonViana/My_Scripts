@@ -11,8 +11,8 @@ docker run -itd \
         --ip 45.xx.xx.10 \
         -p 80:80 \
         -p 443:443 \
-        -v /storage/docker/librespeed01/:/opt/librespeed/ \
-        jvconsult/librespeed:1.0
+        -v librespeed01/:/opt/librespeed/ \
+        jvconsult/librespeed:2.0
 
 Adicionar o banco de dados do librespeed no server mysql...
 ##############################################################
