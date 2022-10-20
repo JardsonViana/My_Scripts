@@ -30,13 +30,16 @@ RUN apt-get update \
     && mkdir /var/www/librespeed/ \
     && a2ensite librespeed \
     && wget https://github.com/remontti/speedtest/archive/master.zip -P /tmp/ \
-    && unzip /tmp/master.zip \
+    && unzip /tmp/master.zip -d /tmp/ \
     && mv /tmp/speedtest-master/versao_remontti/* /var/www/librespeed/ \
     && mkdir /opt/librespeed \
-    && ln -s /etc/apache2/sites-available/librespeed.conf /opt/librespeed/ \
-    && ln -s /var/www/librespeed/results/telemetry_settings.php /opt/librespeed/ \
-    && ln -s /var/www/librespeed/index.html /opt/librespeed/ \
-    && apt remove -y wget unzip \
+    && mv /etc/apache2/sites-available/librespeed.conf /opt/librespeed/ \
+    && mv /var/www/librespeed/results/telemetry_settings.php /opt/librespeed/ \
+    && mv /var/www/librespeed/index.html /opt/librespeed/ \
+    && ln -s "/opt/librespeed/librespeed.conf" "/etc/apache2/sites-available/" \
+    && ln -s "/opt/librespeed/telemetry_settings.php" "/var/www/librespeed/results/" \
+    && ln -s "/opt/librespeed/index.html" "/var/www/librespeed/" \
+    && apt remove --purge -y wget unzip \
     && apt autoremove \
     && apt clean \
     && rm -rf /var/cache/apt/*
