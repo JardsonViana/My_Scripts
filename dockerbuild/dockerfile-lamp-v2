@@ -1,0 +1,35 @@
+FROM debian:bullseye-slim
+
+ENV \
+    MAINTAINER="Jardson Viana" \
+    EMAIL=jardson.consultoria@gmail.com \
+    TERM=xterm \
+    TZ=America/Sao_Paulo \
+    PS1='\u@\h:\w\$ ' \
+    DOMAIN=jvconsultisp.com.br
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+    apache2 apache2-utils \
+    libapache2-mod-php php php-mysql \
+    php-cli php-pear php-gmp php-gd \
+    php-bcmath php-mbstring php-curl \
+    php-xml php-zip \
+    nano wget \
+    certbot python3-certbot-apache \
+    && a2enmod rewrite && a2enmod headers \
+    && wget https://github.com/JardsonViana/zabbix-6-debian11/raw/main/conf-apache2 -O /etc/apache2/sites-enabled/000-default.conf \
+    && sed -i 's/ServerTokens OS/ServerTokens Prod/' /etc/apache2/conf-available/security.conf \
+    && sed -i 's/ServerSignature On/ServerSignature Off/' /etc/apache2/conf-available/security.conf \
+    && echo '<?php phpinfo(); ?>' > /var/www/html/phpinfo.php \
+    && rm /etc/localtime \
+    && ln -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
+    && apt autoremove \
+    && apt clean \
+    && rm -rf /var/cache/apt/*
+
+EXPOSE 80/TCP 443/TCP
+
+CMD ["apachectl", "-D",  "FOREGROUND"]
