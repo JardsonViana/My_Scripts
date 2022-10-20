@@ -44,3 +44,4 @@ RUN apt-get update \
 EXPOSE 80/TCP 443/TCP
 
 CMD ["apachectl", "-D",  "FOREGROUND"]
+
