@@ -1,0 +1,59 @@
+##############################################################
+Exemplo de aplicação no Host:
+
+mkdir /storage/docker/librespeed01
+
+docker run -itd \
+        --name librespeed01 \
+        --hostname librespeed01 \
+        --network rede-externa \
+        --restart always \
+        --ip 45.xx.xx.10 \
+        -p 80:80 \
+        -p 443:443 \
+        -v /storage/docker/librespeed01/:/opt/librespeed/ \
+        jvconsult/librespeed:1.0
+
+Adicionar o banco de dados do librespeed no server mysql...
+##############################################################
+
+##############################################################
+Exemplo de configuração mysql para o librespeed:
+
+mariadb -u root -p
+---------------------------
+CREATE DATABASE librespeed;
+GRANT ALL PRIVILEGES ON librespeed.* TO 'librespeed'@'localhost' IDENTIFIED BY 'SUA_SENHA';
+FLUSH PRIVILEGES;
+quit;
+---------------------------
+-----
+mariadb -p -u librespeed
+---------------------------
+USE librespeed;
+ 
+CREATE TABLE `speedtest_users` (
+  `id` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ip` text NOT NULL,
+  `ispinfo` text,
+  `extra` text,
+  `ua` text NOT NULL,
+  `lang` text NOT NULL,
+  `dl` text,
+  `ul` text,
+  `ping` text,
+  `jitter` text,
+  `log` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ 
+ALTER TABLE `speedtest_users`
+  ADD PRIMARY KEY (`id`);
+ 
+ALTER TABLE `speedtest_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+ 
+show tables;
+---------------------------
+----
+##############################################################
