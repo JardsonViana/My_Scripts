@@ -29,7 +29,7 @@ RUN apt-get update \
     && touch /etc/apache2/sites-available/librespeed.conf \
     && mkdir /var/www/librespeed/ \
     && a2ensite librespeed \
-    && wget https://github.com/remontti/speedtest/archive/master.zip /tmp/ \
+    && wget https://github.com/remontti/speedtest/archive/master.zip -P /tmp/ \
     && unzip /tmp/master.zip \
     && mv /tmp/speedtest-master/versao_remontti/* /var/www/librespeed/ \
     && mkdir /opt/librespeed \
