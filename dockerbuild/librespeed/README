@@ -1,5 +1,11 @@
+
+// Buildando a imagem docker:
+1 - Criar o arquivo Dockerfile dentro da pasta;
+2 - realizar a compilação com o comando: 
+        docker build . -t jvconsult/librespeed:2.0
+
 ##############################################################
-Exemplo de aplicação no Host:
+// Exemplo de aplicação no Host:
 
 mkdir /storage/docker/librespeed01
 
@@ -18,7 +24,7 @@ Adicionar o banco de dados do librespeed no server mysql...
 ##############################################################
 
 ##############################################################
-Exemplo de configuração mysql para o librespeed:
+// Exemplo de configuração mysql para o librespeed:
 
 mariadb -u root -p
 ---------------------------
