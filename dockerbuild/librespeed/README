@@ -63,3 +63,21 @@ show tables;
 ---------------------------
 ----
 ##############################################################
+// Criando um virtualhost para o librespeed no arquivo librespeed.conf
+
+-----------------
+<virtualhost *:80>
+        ServerName speed.jvconsultisp.com.br
+        ServerAdmin noc@jvconsultisp.com.br
+        DocumentRoot /var/www/librespeed 
+        <directory /var/www/librespeed/ >
+                Options FollowSymLinks
+                AllowOverride All
+        </directory> 
+        LogLevel warn 
+        ErrorLog ${APACHE_LOG_DIR}/error_librespeed.log
+        CustomLog ${APACHE_LOG_DIR}/access_librespeed.log combined
+</virtualhost>
+-----------------
+
+##############################################################
