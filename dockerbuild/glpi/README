@@ -1,0 +1,44 @@
+// Buildando a imagem docker:
+1 - Criar o arquivo Dockerfile dentro da pasta;
+2 - realizar a compilação com o comando: 
+        docker build . -t jvconsult/glpi:1.0
+
+##############################################################
+// Exemplo de aplicação no Host:
+
+mkdir /storage/docker/glpi01
+
+docker run -itd \
+        --name glpi01 \
+        --hostname glpi01 \
+        --network rede-externa \
+        --restart always \
+        --ip 45.xx.xx.10 \
+        -p 80:80 \
+        -p 443:443 \
+        -v glpi01/:/var/www/html/glpi/ \
+        jvconsult/glpi:1.0
+
+Adicionar o banco de dados do glpi no server mysql...
+##############################################################
+
+##############################################################
+// Exemplo de configuração mysql para o librespeed:
+
+mariadb -u root -p
+---------------------------
+CREATE DATABASE glpi;
+GRANT ALL PRIVILEGES ON glpi.* TO 'glpi'@'localhost' IDENTIFIED BY 'SUA_SENHA';
+FLUSH PRIVILEGES;
+quit;
+---------------------------
+
+##############################################################
+#---------- Por segurança renomeie a pasta install.
+
+cd /var/www/html/glpi/
+mv install/ install_XGT29122016
+
+##############################################################
+
+Agora acesse em seu navegador http://IP-SERVIDOR/glpi/
