@@ -31,10 +31,11 @@ RUN apt-get update \
     && echo '<?php phpinfo(); ?>' > /var/www/html/phpinfo.php \
     && rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
-    && sed -i 's/max_execution_time = 30/max_execution_time = 600/' \
-    && sed -i 's/session.auto_start = 0/session.auto_start = off/' \
+    && sed -i 's/max_execution_time = 30/max_execution_time = 600/' /etc/php/7.4/apache2/php.ini \
+    && sed -i 's/session.auto_start = 0/session.auto_start = off/' /etc/php/7.4/apache2/php.ini \
     && wget --no-check-certificate https://github.com/glpi-project/glpi/releases/download/10.0.3/glpi-10.0.3.tgz -P /var/www/html \
-    && tar -vxf /var/www/html/glpi-10.0.3.tgz -d /var/www/html/ \
+    && cd /var/www/html/ \
+    && tar -vxf glpi-10.0.3.tgz \
     && chown www-data. -R /var/www/html/glpi/ \
     && mv /etc/php/7.4/apache2/php.ini /var/www/html/glpi/ \
     && ln -s "/var/www/html/glpi/php.ini" "/etc/php/7.4/apache2/" \
