@@ -40,7 +40,7 @@ docker run -itd \
 docker run -itd \
         --name zabbix-front \
         --hostname zabbix-front \
-        --network rede-publica \
+        --network rede-privada \
         --restart always \
         --ip 45.xx.xx.10 \
         -v zabbix-front:/etc/zabbix \
@@ -51,7 +51,7 @@ docker run -itd \
 docker run -itd \
         --name zabbix-agent \
         --hostname zabbix-agent \
-        --network rede-publica \
+        --network rede-privada \
         --restart always \
         --ip 45.xx.xx.10 \
         -v zabbix-agent:/etc/zabbix \
@@ -86,8 +86,17 @@ Extra:
 ```
 docker network create \
 -d ipvlan \
---subnet=RANGE_IP \
+--subnet=RANGE_IP_PUBLICO \
 --gateway=IP_GATEWAY \
 -o parent=PLACA_REDE \
 rede-pulica
+
+docker network create \
+-d ipvlan \
+--subnet=RANGE_IP_PRIVADO \
+--gateway=IP_GATEWAY \
+-o parent=PLACA_REDE \
+rede-privada
 ```
+
+
