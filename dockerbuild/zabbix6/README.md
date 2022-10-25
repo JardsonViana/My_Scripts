@@ -38,8 +38,8 @@ docker run -itd \
 -Zabbix-Front:
 ```
 docker run -itd \
-        --name zabbix-server \
-        --hostname zabbix-server \
+        --name zabbix-front \
+        --hostname zabbix-front \
         --network rede-publica \
         --restart always \
         --ip 45.xx.xx.10 \
@@ -49,8 +49,8 @@ docker run -itd \
 -Zabbix-Agent
 ```
 docker run -itd \
-        --name zabbix-server \
-        --hostname zabbix-server \
+        --name zabbix-agent \
+        --hostname zabbix-agent \
         --network rede-publica \
         --restart always \
         --ip 45.xx.xx.10 \
