@@ -61,7 +61,7 @@ Extra:
 // Criando rede IPvlan no docker:
 
 ```
-docker create \
+docker network create \
 -d ipvlan \
 --subnet=RANGE_IP \
 --gateway=IP_GATEWAY \
