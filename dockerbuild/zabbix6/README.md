@@ -24,6 +24,7 @@ docker build . -t jvconsult/zabbix6-agent:1.0
 
 
 // Exemplo de aplicação no Host:
+-Zabbix-Server:
 ```
 docker run -itd \
         --name zabbix-server \
@@ -33,6 +34,28 @@ docker run -itd \
         --ip 45.xx.xx.10 \
         -v zabbix-server/:/lib/zabbix \
         jvconsult/zabbix6-server:1.0
+```
+-Zabbix-Front:
+```
+docker run -itd \
+        --name zabbix-server \
+        --hostname zabbix-server \
+        --network rede-publica \
+        --restart always \
+        --ip 45.xx.xx.10 \
+        -v zabbix-front/:/etc/zabbix \
+        jvconsult/zabbix6-front:1.0
+```
+-Zabbix-Agent
+```
+docker run -itd \
+        --name zabbix-server \
+        --hostname zabbix-server \
+        --network rede-publica \
+        --restart always \
+        --ip 45.xx.xx.10 \
+        -v zabbix-agent/:/etc/zabbix \
+        jvconsult/zabbix6-agent:1.0
 ```
 Adicionar o banco de dados do zabbix-server no server mysql...
 ----
