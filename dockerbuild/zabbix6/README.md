@@ -54,3 +54,17 @@ quit;
 ##############################################################
 
 Agora acesse em seu navegador http://IP-SERVIDOR/zabbix/
+
+
+Extra:
+-------
+// Criando rede IPvlan no docker:
+
+```
+docker create \
+-d ipvlan \
+--subnet=RANGE_IP \
+--gateway=IP_GATEWAY \
+-o parent=PLACA_REDE \
+rede-pulica
+```
