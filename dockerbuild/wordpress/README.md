@@ -1,7 +1,10 @@
 
 # Buildando a imagem docker:
+
 1 - Criar o arquivo Dockerfile dentro da pasta;
+
 2 - realizar a compilação com o comando: 
+
 ````docker build . -t jvconsult/wordpress:1.0````
 
 ##############################################################
