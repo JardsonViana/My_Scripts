@@ -33,6 +33,10 @@ GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY 'SU
 FLUSH PRIVILEGES;
 quit;
 ---------------------------
+##############################################################
+// Alterando porta do apache2:
+
+nano /etc/apache2/port.conf
 
 ##############################################################
 // Criando um virtualhost para o wordpress no arquivo wordpress.conf
