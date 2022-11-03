@@ -45,6 +45,7 @@ nano /etc/apache2/port.conf
 // Criando um virtualhost para o wordpress no arquivo wordpress.conf
 
 -----------------
+
 <virtualhost *:80>
         ServerName blog.jvconsultisp.com.br
         ServerAdmin noc@jvconsultisp.com.br
@@ -59,7 +60,8 @@ nano /etc/apache2/port.conf
         LogLevel warn 
         ErrorLog ${APACHE_LOG_DIR}/error_blog.jvconsultisp.com.br.conf.log
         CustomLog ${APACHE_LOG_DIR}/access_blog.jvconsultisp.com.br.conf.log combined
-</virtualhost>
+</virtualhost> 
+
 -----------------
 
 ##############################################################
