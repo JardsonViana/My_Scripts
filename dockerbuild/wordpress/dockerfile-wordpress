@@ -28,21 +28,23 @@ RUN apt-get update \
     && ln -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
     && touch /etc/apache2/sites-available/wordpress.conf \
     && mkdir /var/www/wordpress/ \
+    && mkdir /var/www/wordpress/apache2 \
     && a2ensite wordpress \
     && wget https://br.wordpress.org/latest-pt_BR.zip -P /tmp/ \
     && unzip /tmp/latest-pt_BR.zip -d /tmp/ \
     && mv /tmp/wordpress/* /var/www/wordpress/ \
     && chown www-data. /var/www/wordpress/ -R \
-    && mv /etc/apache2/sites-available/wordpress.conf /var/www/wordpress/ \
-    && mv /etc/php/7.4/apache2/php.ini /var/www/wordpress/ \
-    && ln -s "/var/www/wordpress/wordpress.conf" "/etc/apache2/sites-available/" \
-    && ln -s "/var/www/wordpress/php.ini" "/etc/php/7.4/apache2/" \
+    && mv /etc/apache2/sites-available/wordpress.conf /var/www/wordpress/apache2/ \
+    && mv /etc/php/7.4/apache2/php.ini /var/www/wordpress/apache2/ \
+    && mv /etc/apache2/ports.conf /var/www/wordpress/apache2/ \
+    && ln -s "/var/www/wordpress/apache2/wordpress.conf" "/etc/apache2/sites-available/" \
+    && ln -s "/var/www/wordpress/apache2/php.ini" "/etc/php/7.4/apache2/" \
+    && ln -s "/var/www/wordpress/apache2/ports.conf" "/etc/apache2/" \
     && rm -Rf /tmp/* \
     && apt remove --purge -y wget unzip \
     && apt autoremove \
     && apt clean \
     && rm -rf /var/cache/apt/*
 
-EXPOSE 80/TCP 443/TCP
 
 CMD ["apachectl", "-D",  "FOREGROUND"]
