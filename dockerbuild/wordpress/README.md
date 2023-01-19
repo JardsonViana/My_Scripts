@@ -5,7 +5,7 @@
 
 2 - realizar a compilação com o comando: 
 
-````docker build . -t jvconsult/wordpress:1.0````
+````docker build . -t jvisp/wordpress-apache:1.0````
 
 
 // Exemplo de aplicação no Host:
@@ -15,13 +15,12 @@ mkdir /storage/docker/wordpress01
 docker run -itd \
         --name wordpress01 \
         --hostname wordpress01 \
-        --network rede-externa \
+        --network rede-docker \
         --restart always \
-        --ip 45.xx.xx.10 \
-        -p 80:80 \
-        -p 443:443 \
+        -p 60080:80 \
+        -p 60443:443 \
         -v wordpress01/:/var/www/wordpress/ \
-        jvconsult/wordpress:1.0
+        jvisp/wordpress-apache:1.0
 ````
 
 Adicionar o banco de dados do wordpress no server mysql...
@@ -37,10 +36,6 @@ GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY 'SU
 FLUSH PRIVILEGES;
 quit;
 ````
-
-// Alterando porta do apache2:
-
-nano /etc/apache2/port.conf
 
 ------
 
