@@ -2,13 +2,13 @@
 // Buildando a imagem docker:
 1 - Criar o arquivo Dockerfile dentro da pasta;
 2 - realizar a compilação com o comando: 
+````
         docker build . -t jvconsult/librespeed:2.0
+````
 
-##############################################################
 // Exemplo de aplicação no Host:
 
-mkdir /storage/docker/librespeed01
-
+````
 docker run -itd \
         --name librespeed01 \
         --hostname librespeed01 \
@@ -19,23 +19,26 @@ docker run -itd \
         -p 443:443 \
         -v librespeed01/:/opt/librespeed/ \
         jvconsult/librespeed:2.0
+        
+````
 
 Adicionar o banco de dados do librespeed no server mysql...
-##############################################################
+----
 
-##############################################################
 // Exemplo de configuração mysql para o librespeed:
 
 mariadb -u root -p
----------------------------
+
+````
 CREATE DATABASE librespeed;
 GRANT ALL PRIVILEGES ON librespeed.* TO 'librespeed'@'localhost' IDENTIFIED BY 'SUA_SENHA';
 FLUSH PRIVILEGES;
 quit;
----------------------------
+````
+
 -----
 mariadb -p -u librespeed
----------------------------
+````
 USE librespeed;
  
 CREATE TABLE `speedtest_users` (
@@ -60,12 +63,14 @@ ALTER TABLE `speedtest_users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
  
 show tables;
----------------------------
+
+````
+
 ----
-##############################################################
+
 // Criando um virtualhost para o librespeed no arquivo librespeed.conf
 
------------------
+````
 <virtualhost *:80>
         ServerName speed.jvconsultisp.com.br
         ServerAdmin noc@jvconsultisp.com.br
@@ -78,6 +83,6 @@ show tables;
         ErrorLog ${APACHE_LOG_DIR}/error_librespeed.log
         CustomLog ${APACHE_LOG_DIR}/access_librespeed.log combined
 </virtualhost>
------------------
+````
 
 ##############################################################
