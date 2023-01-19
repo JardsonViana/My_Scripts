@@ -12,13 +12,13 @@
 docker run -itd \
         --name librespeed01 \
         --hostname librespeed01 \
-        --network rede-externa \
+        --network rede-docker \
         --restart always \
-        --ip 45.xx.xx.10 \
-        -p 80:80 \
-        -p 443:443 \
-        -v librespeed01/:/opt/librespeed/ \
-        jvconsult/librespeed:2.0
+        -p 60180:80 \
+        -m 128M \
+        -c 307 \
+        -v librespeed01:/opt/librespeed/ \
+        jvisp/librespeed-apache:1.0
         
 ````
 
