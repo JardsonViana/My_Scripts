@@ -5,7 +5,10 @@ ENV \
     EMAIL=jardson.consultoria@gmail.com \
     TERM=xterm \
     TZ=America/Sao_Paulo \
-    PS1='\u@\h:\w\$ '
+    PS1='\u@\h:\w\$ ' \
+    GLPI_VAR_DIR=/opt/glpi/files \
+    GLPI_CONFIG_DIR=/opt/glpi/config
+
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -32,6 +35,9 @@ RUN apt-get update \
     && cd /var/www/html/ \
     && tar -vxf glpi-10.0.5.tgz \
     && chown www-data. -R /var/www/html/glpi/ \
+    && mkdir /opt/glpi \
+    && mv /var/www/html/glpi/files /opt/glpi/ \
+    && mv /var/www/html/glpi/config /opt/glpi/ \
     && rm -f /var/www/html/*.tgz \
     && apt remove --purge -y wget unzip \
     && apt autoremove \
