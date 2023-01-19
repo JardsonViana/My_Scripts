@@ -1,0 +1,36 @@
+version: "3"
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80'       # Porta HTTP pública
+      - '443:443'     # Porta HTTPS pública
+      - '81:81' # Porta de administracao do Nginx Proxy
+      # Adicione qualquer outra porta Stream que você queira expor, ex
+      # - '21:21' # FTP
+    environment:
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "nginxproxy"
+      DB_MYSQL_PASSWORD: "S3NHA_NGINX_PR0XY"
+      DB_MYSQL_NAME: "nginxproxy"
+      # Remova o comentário se você não tem o IPv6 em seu host
+      # DISABLE_IPV6: 'true'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+ 
+  db:
+    image: 'jc21/mariadb-aria:latest'
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 'S3NHA_D3_R00T'
+      MYSQL_DATABASE: 'nginxproxy'
+      MYSQL_USER: 'nginxproxy'
+      MYSQL_PASSWORD: 'S3NHA_NGINX_PR0XY'
+    volumes:
+      - ./data/mysql:/var/lib/mysql
