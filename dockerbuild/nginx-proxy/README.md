@@ -39,3 +39,10 @@ Agora abra na porta 81 http://IP_SERVIDOR:81/ e entre com:
 Email: admin@example.com 
 Password: changeme
 ````
+
+// Dados persistentes para backup:
+===============================================
+````
+/etc/nginx-proxy/data
+/etc/nginx-proxy/letsencrypt
+````
