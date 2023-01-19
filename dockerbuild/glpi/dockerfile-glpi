@@ -5,8 +5,7 @@ ENV \
     EMAIL=jardson.consultoria@gmail.com \
     TERM=xterm \
     TZ=America/Sao_Paulo \
-    PS1='\u@\h:\w\$ ' \
-    DOMAIN=jvconsultisp.com.br
+    PS1='\u@\h:\w\$ '
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -22,28 +21,26 @@ RUN apt-get update \
     php-xmlrpc php-xsl php-imap php-ldap \
     php-file-iterator php-json \
     php-intl php-cas php-apcu \
-    nano wget curl unzip \
-    certbot python3-certbot-apache \
+    wget curl unzip \
     && a2enmod rewrite && a2enmod headers \
-    && wget https://github.com/JardsonViana/zabbix-6-debian11/raw/main/conf-apache2 -O /etc/apache2/sites-enabled/000-default.conf \
     && sed -i 's/ServerTokens OS/ServerTokens Prod/' /etc/apache2/conf-available/security.conf \
     && sed -i 's/ServerSignature On/ServerSignature Off/' /etc/apache2/conf-available/security.conf \
     && echo '<?php phpinfo(); ?>' > /var/www/html/phpinfo.php \
     && rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
-    && sed -i 's/max_execution_time = 30/max_execution_time = 600/' /etc/php/7.4/apache2/php.ini \
-    && sed -i 's/session.auto_start = 0/session.auto_start = off/' /etc/php/7.4/apache2/php.ini \
-    && wget --no-check-certificate https://github.com/glpi-project/glpi/releases/download/10.0.3/glpi-10.0.3.tgz -P /var/www/html \
+    && wget --no-check-certificate https://github.com/glpi-project/glpi/releases/download/10.0.5/glpi-10.0.5.tgz -P /var/www/html \
     && cd /var/www/html/ \
-    && tar -vxf glpi-10.0.3.tgz \
+    && tar -vxf glpi-10.0.5.tgz \
     && chown www-data. -R /var/www/html/glpi/ \
-    && mv /etc/php/7.4/apache2/php.ini /var/www/html/glpi/ \
-    && ln -s "/var/www/html/glpi/php.ini" "/etc/php/7.4/apache2/" \
     && rm -f /var/www/html/*.tgz \
     && apt remove --purge -y wget unzip \
     && apt autoremove \
     && apt clean \
     && rm -rf /var/cache/apt/*
+
+COPY 000-default.conf /etc/apache2/sites-enabled/
+
+COPY php.ini /etc/php/7.4/apache2/
 
 EXPOSE 80/TCP 443/TCP
 
