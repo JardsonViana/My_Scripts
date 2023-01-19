@@ -5,46 +5,42 @@ ENV \
     EMAIL=jardson.consultoria@gmail.com \
     TERM=xterm \
     TZ=America/Sao_Paulo \
-    PS1='\u@\h:\w\$ ' \
-    DOMAIN=jvconsultisp.com.br
+    PS1='\u@\h:\w\$ '
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
-    apache2 apache2-utils \
+    apache2 apache2-utils ca-certificates \
     libapache2-mod-php php php-mysql \
     php-cli php-pear php-gmp php-gd \
     php-bcmath php-mbstring php-curl \
     php-xml php-zip \
-    nano wget unzip \
-    certbot python3-certbot-apache \
+    wget unzip \
     && a2enmod rewrite && a2enmod headers \
-    && wget https://github.com/JardsonViana/zabbix-6-debian11/raw/main/conf-apache2 -O /etc/apache2/sites-enabled/000-default.conf \
     && sed -i 's/ServerTokens OS/ServerTokens Prod/' /etc/apache2/conf-available/security.conf \
     && sed -i 's/ServerSignature On/ServerSignature Off/' /etc/apache2/conf-available/security.conf \
     && echo '<?php phpinfo(); ?>' > /var/www/html/phpinfo.php \
     && rm /etc/localtime \
     && ln -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
-    && touch /etc/apache2/sites-available/librespeed.conf \
     && mkdir /var/www/librespeed/ \
-    && a2ensite librespeed \
     && wget https://github.com/remontti/speedtest/archive/master.zip -P /tmp/ \
     && unzip /tmp/master.zip -d /tmp/ \
     && mv /tmp/speedtest-master/versao_remontti/* /var/www/librespeed/ \
     && mkdir /opt/librespeed \
-    && mv /etc/apache2/sites-available/librespeed.conf /opt/librespeed/ \
     && mv /var/www/librespeed/results/telemetry_settings.php /opt/librespeed/ \
     && mv /var/www/librespeed/index.html /opt/librespeed/ \
-    && ln -s "/opt/librespeed/librespeed.conf" "/etc/apache2/sites-available/" \
+    && mv /var/www/librespeed/logo.png /opt/librespeed/ \
     && ln -s "/opt/librespeed/telemetry_settings.php" "/var/www/librespeed/results/" \
     && ln -s "/opt/librespeed/index.html" "/var/www/librespeed/" \
+    && ln -s "/opt/librespeed/logo.png" "/var/www/librespeed/" \
     && apt remove --purge -y wget unzip \
     && apt autoremove \
     && apt clean \
     && rm -rf /var/cache/apt/*
 
-EXPOSE 80/TCP 443/TCP
+COPY 000-default.conf /etc/apache2/sites-enabled/
+
+EXPOSE 80/TCP
 
 CMD ["apachectl", "-D",  "FOREGROUND"]
-
