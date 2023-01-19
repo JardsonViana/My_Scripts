@@ -10,7 +10,6 @@
 
 // Exemplo de aplicação no Host:
 ````
-mkdir /storage/docker/wordpress01
 
 docker run -itd \
         --name wordpress01 \
@@ -18,8 +17,9 @@ docker run -itd \
         --network rede-docker \
         --restart always \
         -p 60080:80 \
-        -p 60443:443 \
-        -v wordpress01/:/var/www/wordpress/ \
+        -m 128M \
+        -c 204 \
+        -v wordpress01:/var/www/wordpress/ \
         jvisp/wordpress-apache:1.0
 ````
 
