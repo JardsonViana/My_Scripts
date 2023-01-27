@@ -1,1 +1,1 @@
-INSERT INTO `ftpd` (`User`, `status`, `Password`, `Uid`, `Gid`, `Dir`, `ULBandwidth`, `DLBandwidth`, `comment`, `ipaccess`, `QuotaSize`, `QuotaFiles`) VALUES ('LOGIN', '1', MD5('PASSWORD'), '2001', '2001', '/var/pure-ftpd/LOGIN', '0', '0', '', '*', '0', '0');" > /opt/users/adduser.SQL
+INSERT INTO `ftpd` (`User`, `status`, `Password`, `Uid`, `Gid`, `Dir`, `ULBandwidth`, `DLBandwidth`, `comment`, `ipaccess`, `QuotaSize`, `QuotaFiles`) VALUES ('LOGIN', '1', MD5('PASSWORD'), '2001', '2001', '/var/pure-ftpd/LOGIN', '0', '0', '', '*', '0', '0');
