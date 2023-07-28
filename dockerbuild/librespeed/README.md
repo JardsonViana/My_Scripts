@@ -3,7 +3,7 @@
 1 - Criar o arquivo Dockerfile dentro da pasta;
 2 - realizar a compilação com o comando: 
 ````
-        docker build . -t jvconsult/librespeed:2.0
+        docker build . -t jvisp/librespeed-apache:1.0
 ````
 
 // Exemplo de aplicação no Host:
@@ -65,6 +65,15 @@ ALTER TABLE `speedtest_users`
 show tables;
 
 ````
+----
+
+// Para adicionar uma Logo ao librespeed:
+- Subir via FTP um logotipo para a pasta /home/USER
+- Copiar para o diretorio do volume do librespeed:
+````
+mv /home/fulano/logo.png /var/lib/docker/volumes/librespeed01/_data/logo.png
+````
+
 
 ----
 
