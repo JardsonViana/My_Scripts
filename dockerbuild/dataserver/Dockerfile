@@ -27,7 +27,7 @@ RUN apt-get update \
     && mkdir -p /var/www/jvconsult/{TXT,IMAGENS} \
     && touch /var/www/jvconsult/IMAGENS/arquivo-teste.txt \
     && touch /var/www/jvconsult/TXT/arquivo-teste.txt \
-    && htpasswd -cb /var/www/jvconsult/.htpasswd jardson yedaxj36@@ \
+    && htpasswd -cb /var/www/jvconsult/.htpasswd jardson MINHASUPERSENHA@ \
     && wget https://raw.githubusercontent.com/JardsonViana/My_Scripts/main/Install/apache2-banco-de-imagens/jvconsult.conf -O /var/www/jvconsult/jvconsult.conf \
     && ln -s "/var/www/jvconsult/jvconsult.conf" "/etc/apache2/sites-available/jvconsult.conf" \
     && a2ensite jvconsult \
